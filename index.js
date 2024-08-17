@@ -2,10 +2,16 @@
 //xablaudnv
 //const prompt = require('prompt-sync')();
 var contOlimpiadas = 1
-var inventario = null
+var inventario = [];
 var checkpoint1 = false;
 var checkpoint2 = false;
 var checkpoint3 = false;
+
+function incluirSentimento(sentimento, nota){
+    if(!inventario.includes(sentimento)){
+        inventario.push(sentimento)
+    }
+}
 
 function cena1(){
     
@@ -17,8 +23,15 @@ function cena1(){
 
     if(resposta == 1){
         contOlimpiadas++
+        incluirSentimento("felicidade")
+        incluirSentimento("felicidade")
+        incluirSentimento("preguiça")
     }else{
         contOlimpiadas--
+    }
+alert(inventario)
+    if(inventario.includes("preguiça")){
+        //fazer codigo para tirar preguiça
     }
 
     alert("Checkpoint 1")
