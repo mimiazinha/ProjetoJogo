@@ -60,13 +60,17 @@ alert("inventario: "+ inventario)
     alert("parabens! você concluiu a fase 1.")
     resposta = prompt("Deseja salvar seu progresso? Digite \n 1- Sim\n 2- Não")
     if(resposta == 1){
+        checkpoint1 = true;
         mantemProgresso1 = true;
-    } else mantemProgresso1 = false;
+    } else {
+        checkpoint1 = false;
+        mantemProgresso1 = false;
+    }
 
     
     alert("contVida cena 1: "+ contVida)
     
-    return (contVida > 0); //Retornando se é gameover ou não
+    return (contVida <= 0); //Retornando se é gameover ou não
 }
 
 function cena2() {
@@ -83,21 +87,17 @@ function cena2() {
 
    
         resposta = prompt("Deseja salvar seu progresso? Digite \n 1- Sim\n 2- Não")
-        
         if(resposta == 1){
             checkpoint1 = false;
             checkpoint2 = true;
-            checkpoint3 = true;
         } else {
-            checkpoint1 = false;
             checkpoint2 = false;
-            checkpoint3 = true;
         }
 
     alert("contVida cena 2: "+ contVida)
     alert("inventario: "+ inventario)
     
-    return (contVida > 0); //Retornando se é gameover ou não
+    return (contVida <= 0); //Retornando se é gameover ou não
 }
 
 function cena3() {
@@ -120,14 +120,13 @@ function cena3() {
             checkpoint2 = false;
             checkpoint3 = true;
         } else {
-            checkpoint1 = true;
-            checkpoint2 = false;
             checkpoint3 = false;
         }
+
     alert("contVida cena 3: "+ contVida)
     alert("inventario: "+ inventario)
     
-    return (contVida > 0); //Retornando se é gameover ou não
+    return (contVida <= 0); //Retornando se é gameover ou não
 }
 
 
@@ -137,39 +136,41 @@ function cenaVitoria() {
 
 var contVida = 4;
 var inventario = [];
-var continuarJogo = true;
-var checkpoint1 = true;
-var checkpoint2 = true;
-var checkpoint3 = true;
+var recomecarJogo = true;
+var ehgameOver = false;
+var checkpoint1 = false;
+var checkpoint2 = false;
+var checkpoint3 = false;
 var mantemProgresso1 = false;
 
 while(true){
-    if (checkpoint1){
-        continuarJogo = cena1();
-        if (contVida === 10) {
+    if (checkpoint1 || recomecarJogo){
+        ehgameOver = cena1();
+        if (contVida >= 15) {
             cenaVitoria()
             break;
-        } else if(contVida <= 0) {
+        } else if(ehgameOver) {
+            alert("Game Over");
+        }
+    }
+    if (checkpoint2 || recomecarJogo){
+        ehgameOver = cena2();
+        if (contVida >= 15) {
+            cenaVitoria()
+            break;
+        } else if(ehgameOver) {
             alert("Game Over")
         }
     }
-    if (checkpoint2){
-        continuarJogo = cena2();
-        if (contVida === 10) {
+    if (checkpoint3 || recomecarJogo){
+        ehgameOver = cena3();
+        if (contVida >= 15) {
             cenaVitoria()
             break;
-        } else if(contVida <= 0) {
+        } else if(ehgameOver) {
             alert("Game Over")
         }
     }
-    if (checkpoint3){
-        continuarJogo = cena3();
-        if (contVida === 10) {
-            cenaVitoria()
-            break;
-        } else if(contVida <= 0) {
-            alert("Game Over")
-        }
-    }
+
+    recomecarJogo = (!checkpoint1 && !checkpoint2 && !checkpoint3);
 }
-//fim
