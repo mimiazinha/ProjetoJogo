@@ -10,7 +10,7 @@ function incluirSentimento(sentimento){
 }
 function removeSentimento(sentimento){
     let index = inventario.indexOf(sentimento);
-    alert("inventario "+ inventario + " posição " + index)
+    //alert("inventario "+ inventario + " posição " + index)
     if (index !== -1) {
         inventario.splice(index, 1);
     }
@@ -25,7 +25,7 @@ function inicializarVariaveis() {
     checkpoint2 = false;
     checkpoint3 = false;
     mantemProgresso1 = false;
-    alert("Inventario limpo.");
+    //alert("Inventario limpo.");
 }
 
 function fase1(){
@@ -33,7 +33,7 @@ function fase1(){
         inicializarVariaveis();
     }
     
-    alert("Esse jogo é baseado na história de Cindy Ngamba, seu objetivo é fazer as escolhar certas e juntar pontos para que você possa chegar nas olimpíedas, boa sorte.")
+    alert("Esse jogo é baseado na história de Cindy Ngamba, seu objetivo é fazer as escolhar certas e juntar pontos para que você possa chegar nas olimpíedas, você também terá um inventario de sentimentos(que poderá utilizar como ajuda em caso de escolhas erradas) a partir da terceira fase. Boa sorte.")
     
     alert("Bem-vindo(a), espero que goste do jogo. \n >>>REFUSENT<<< \n O jogo onde suas escolhas te levam ao sucesso…")
 
@@ -62,7 +62,6 @@ function fase1(){
             if(resposta1 == 1){
                 incluirSentimento("cansaço")
 
-                //removeSentimento("energia")
             }
             
             //cansaço físico ou mental.
@@ -85,7 +84,7 @@ function fase1(){
         }
         
     }
-//alert("inventario: "+ inventario)
+alert("inventario: "+ inventario)
     //if(inventario.includes("preguiça")){
         //fazer codigo para tirar preguiça
     //}
@@ -101,7 +100,7 @@ function fase1(){
     }
 
     
-    alert("contVida cena 1: "+ contVida)
+    //alert("contVida cena 1: "+ contVida)
     
     return (contVida <= 0); //Retornando se é gameover ou não
 }
@@ -123,7 +122,7 @@ function fase2() {
                 if(qntDias < 4) {
                     contVida++
                 } else if(qntDias >= 4 && qntDias <= 7){
-                    contVida = contVida + 2
+                    contVida = contVida + 5
                 } 
                 break; 
             } else{
@@ -144,7 +143,7 @@ function fase2() {
             checkpoint2 = false;
         }
 
-    alert("contVida cena 2: "+ contVida)
+    //alert("contVida cena 2: "+ contVida)
     alert("inventario: "+ inventario)
     
     return (contVida <= 0); //Retornando se é gameover ou não
@@ -152,17 +151,25 @@ function fase2() {
 
 function fase3() {
     alert("parabens! você chegou na fase 3. ")
-    alert("Você está na aula de boxe")
-    alert("você fez um movimento errado e sua professora está muito brava com você!")
-    resposta = prompt("Oque você vai fazer? Digite \n 1- Pedir desculpa e fazer melhor da proxima vez \n 2- Desistir das aulas de boxe")
+    
+    resposta = prompt("Suas notas na escola não estão boas e sua mãe disse que se não melhorar, terá que desistir do boxe. Oque você vai fazer? Digite \n 1- Estudar mais para melhorar as notas \n 2- Desistir de ir para as olimpíadas")
 
     if(resposta == 1){
         contVida = contVida + 2;
     }else{
-        contVida = contVida - 2;
+        resposta = prompt("Você tem certeza? Você possui 'MOTIVAÇÃO' no seu inventario, deseja utilizar? Digite: \n 1- Sim \n 2- Não.")
+        if(resposta == 1){
+
+            removeSentimento("motivação")
+        } else {
+        contVida = contVida - 7; }
     }
 
-   
+    resposta = prompt("Você foi convidada para jogar jogos pré olímpicos, você vai aceitar? Digite \n 1- Sim \n 2- Não")
+
+    if(resposta == 1){
+        contVida = contVida + 2;
+    }
         resposta = prompt("Deseja salvar seu progresso? Digite \n 1- Sim\n 2- Não")
        
         if(resposta == 1){
@@ -173,15 +180,17 @@ function fase3() {
             checkpoint3 = false;
         }
 
-    alert("contVida cena 3: "+ contVida)
-    alert("inventario: "+ inventario)
+    //alert("contVida cena 3: "+ contVida)
+    //alert("inventario: "+ inventario)
     
     return (contVida <= 0); //Retornando se é gameover ou não
 }
 
 
 function cenaVitoria() {
-    alert("Vitoria!!!! \n Você chegou nas olimpiedas! \n obrigada por jogar <3 ")
+    alert("Vitoria!!!! \n Você chegou nas olimpíadas! \n obrigada por jogar <3 \n Essa é você atualmente: \n ")
+    window.open('https://en.wikipedia.org/wiki/Cindy_Ngamba', '_blank');
+
 }
 
 var contVida = 4;
