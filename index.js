@@ -42,7 +42,7 @@ function fase1(){
     if(resposta == 1){
         resposta = prompt("Seus amigos estão na academia e te convidaram para treinar junto, o que você vai fazer? Digite \n 1- Treinar com seus amigos\n 2- Recusar o convite e treinar em casa.")
         if(resposta == 1){
-            contVida = contVida + 2
+            contVida++
         incluirSentimento("motivação")
         incluirSentimento("felicidade")
         incluirSentimento("energia")
@@ -55,13 +55,16 @@ function fase1(){
         
     }else if(resposta == 2){
         let resposta1
-        resposta1 = prompt("Você está se sentindo um pouco cansado(a) hoje? Parece que a energia está um pouco em baixa. Digite \n 1- Sim\n 2- Não. ")
+        
         if(resposta1 == 1){
-            resposta1 = prompt("Você tem 'ENERGIA' em seu inventário, deseja utilizar? Digite \n 1- Sim\n 2- Não. ")
+            resposta1 = prompt("Você está se sentindo um pouco cansado(a) hoje? Parece que a energia está um pouco em baixa. Digite \n 1- Sim\n 2- Não. ")
+            //resposta1 = prompt("Você tem 'ENERGIA' em seu inventário, deseja utilizar? Digite \n 1- Sim\n 2- Não. ")
             if(resposta1 == 1){
-                removeSentimento("energia")
+                incluirSentimento("cansaço")
+
+                //removeSentimento("energia")
             }
-            incluirSentimento("cansaço")
+            
             //cansaço físico ou mental.
         }
         else {
@@ -82,10 +85,10 @@ function fase1(){
         }
         
     }
-alert("inventario: "+ inventario)
-    if(inventario.includes("preguiça")){
+//alert("inventario: "+ inventario)
+    //if(inventario.includes("preguiça")){
         //fazer codigo para tirar preguiça
-    }
+    //}
 
     alert("parabens! você concluiu a fase 1.")
     resposta = prompt("Deseja salvar seu progresso? Digite \n 1- Sim\n 2- Não")
@@ -104,13 +107,30 @@ alert("inventario: "+ inventario)
 }
 
 function fase2() {
-     alert("parabens! você chegou na fase 2. ")
-    alert("Parabens! sua historia esta se formando aos poucos, continue assim!")
+     alert("Parabéns! Você chegou na fase 2. ")
     alert("É seu aniversário! Sua mãe te perguntou qual presente você vai querer.")
-    resposta = prompt("Qual presente vai pedir para sua mãe? Digite \n 1- Luvas de boxe \n 2- Barbie nova")
+    resposta = prompt("O que você vai escolher? Digite \n 1- Luvas de boxe \n 2- Barbie nova")
 
     if(resposta == 1){
         contVida++;
+        resposta1 = prompt("Sua mãe ofereceu para pagar um treinamento de box com um treinador olímpico, você vai aceitar? Digite \n 1- Sim \n 2- Não.")
+       
+        if(resposta1 == 1){
+            
+            while(true){
+             let qntDias = Number(prompt("Quantos dias de treinamento você vai fazer por semana?"))
+             if(qntDias != 'NaN' && qntDias > 0 && qntDias < 8) {
+                if(qntDias < 4) {
+                    contVida++
+                } else if(qntDias >= 4 && qntDias <= 7){
+                    contVida = contVida + 2
+                } 
+                break; 
+            } else{
+                alert("Hein???? Acho que você digitou errado... ")
+            }
+        }
+    }
     }else{
         contVida--;
     }
