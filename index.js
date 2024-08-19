@@ -8,12 +8,29 @@ function incluirSentimento(sentimento){
         inventario.push(sentimento)
     }
 }
+function removeSentimento(sentimento){
+    let index = inventario.indexOf(sentimento);
+    alert("inventario "+ inventario + " posição " + index)
+    if (index !== -1) {
+        inventario.splice(index, 1);
+    }
+}
 
-function cena1(){
+function inicializarVariaveis() { 
+    contVida = 4;
+    inventario = [];
+    recomecarJogo = true;
+    ehgameOver = false;
+    checkpoint1 = false;
+    checkpoint2 = false;
+    checkpoint3 = false;
+    mantemProgresso1 = false;
+    alert("Inventario limpo.");
+}
+
+function fase1(){
     if ((contVida <= 0) && !mantemProgresso1 && !checkpoint2 && !checkpoint3){
-        contVida = 4;
-        inventario = [];
-        alert("Inventario limpo.")
+        inicializarVariaveis();
     }
     
     alert("Esse jogo é baseado na história de Cindy Ngamba, seu objetivo é fazer as escolhar certas e juntar pontos para que você possa chegar nas olimpíedas, boa sorte.")
@@ -23,14 +40,27 @@ function cena1(){
     let resposta = prompt("Essa será sua primeira escolha: Digite \n 1- Treinar\n 2- Descansar")
 
     if(resposta == 1){
-        contVida++
+        resposta = prompt("Seus amigos estão na academia e te convidaram para treinar junto, o que você vai fazer? Digite \n 1- Treinar com seus amigos\n 2- Recusar o convite e treinar em casa.")
+        if(resposta == 1){
+            contVida = contVida + 2
         incluirSentimento("motivação")
         incluirSentimento("felicidade")
+        incluirSentimento("energia")
+        }
+        else if(resposta == 2) {
+            contVida++
+            incluirSentimento("solidão")
+        }
+        
         
     }else if(resposta == 2){
         let resposta1
         resposta1 = prompt("Você está se sentindo um pouco cansado(a) hoje? Parece que a energia está um pouco em baixa. Digite \n 1- Sim\n 2- Não. ")
         if(resposta1 == 1){
+            resposta1 = prompt("Você tem 'ENERGIA' em seu inventário, deseja utilizar? Digite \n 1- Sim\n 2- Não. ")
+            if(resposta1 == 1){
+                removeSentimento("energia")
+            }
             incluirSentimento("cansaço")
             //cansaço físico ou mental.
         }
@@ -73,7 +103,7 @@ alert("inventario: "+ inventario)
     return (contVida <= 0); //Retornando se é gameover ou não
 }
 
-function cena2() {
+function fase2() {
      alert("parabens! você chegou na fase 2. ")
     alert("Parabens! sua historia esta se formando aos poucos, continue assim!")
     alert("É seu aniversário! Sua mãe te perguntou qual presente você vai querer.")
@@ -100,16 +130,16 @@ function cena2() {
     return (contVida <= 0); //Retornando se é gameover ou não
 }
 
-function cena3() {
+function fase3() {
     alert("parabens! você chegou na fase 3. ")
     alert("Você está na aula de boxe")
     alert("você fez um movimento errado e sua professora está muito brava com você!")
     resposta = prompt("Oque você vai fazer? Digite \n 1- Pedir desculpa e fazer melhor da proxima vez \n 2- Desistir das aulas de boxe")
 
     if(resposta == 1){
-        contVida++;
+        contVida = contVida + 2;
     }else{
-        contVida--;
+        contVida = contVida - 2;
     }
 
    
@@ -145,7 +175,7 @@ var mantemProgresso1 = false;
 
 while(true){
     if (checkpoint1 || recomecarJogo){
-        ehgameOver = cena1();
+        ehgameOver = fase1();
         if (contVida >= 15) {
             cenaVitoria()
             break;
@@ -154,7 +184,7 @@ while(true){
         }
     }
     if (checkpoint2 || recomecarJogo){
-        ehgameOver = cena2();
+        ehgameOver = fase2();
         if (contVida >= 15) {
             cenaVitoria()
             break;
@@ -163,7 +193,7 @@ while(true){
         }
     }
     if (checkpoint3 || recomecarJogo){
-        ehgameOver = cena3();
+        ehgameOver = fase3();
         if (contVida >= 15) {
             cenaVitoria()
             break;
