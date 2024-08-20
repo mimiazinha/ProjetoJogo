@@ -1,5 +1,4 @@
-//xablaudois
-//xablaudnv
+
 //const prompt = require('prompt-sync')();
 
 // inclui os sentimentos no inventario de acordo com as escolhas realizadas durante o jogo
